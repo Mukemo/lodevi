@@ -22,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().isOpaque = false
+        //Seeting backbar button
+        let barButton = UIBarButtonItem()
+        let backButton = UIImage(named: "back")
+        let backButtonImage = backButton?.stretchableImage(withLeftCapWidth: 0, topCapHeight: 0)
+        barButton.setBackButtonBackgroundImage(backButtonImage, for: .normal, barMetrics: .default)
+        //End setting back button
         return true
     }
 

@@ -12,7 +12,6 @@ struct Artist{
     var name: String = ""
     var description: String = ""
     var thumbnail: String = ""
-    
     static func parseArtistJSONData(data: Data) -> [Artist]{
         var artists = [Artist]()
         do{

@@ -15,7 +15,7 @@ class NewReleaseCollectionView: UICollectionView, UICollectionViewDelegate, UICo
         self.delegate = self
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

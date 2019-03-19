@@ -8,17 +8,24 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var telephoneTextField: UITextField!
     
-
+    var activitiIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
-       
+        activitiIndicator.center = self.view.center
+        activitiIndicator.hidesWhenStopped = true
+        activitiIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        self.view.addSubview(activitiIndicator)
         usernameTextField.attributedPlaceholder = NSAttributedString(string: "John Doe", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         telephoneTextField.attributedPlaceholder = NSAttributedString(string: "243 90000000", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "secret", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        telephoneTextField.delegate = self
+        
     }
     
     /*@IBAction func countryButtonTapped(sender: UIButton){
@@ -29,7 +36,10 @@ class RegisterViewController: UIViewController {
             }, completion: nil)
         }
     }*/
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     @IBAction func resgisterButtonTapped(sender: UIButton){
         guard let name = usernameTextField.text, usernameTextField.text != "" else {
             OperationQueue.main.addOperation {
@@ -53,20 +63,25 @@ class RegisterViewController: UIViewController {
         
         AuthService.instance.registerUser(username: name, password: password, telephone: tel, completion: { Success in
             if Success {
-//                AuthService.instance.logIn(email: email, password: pass, completion: { Success in
-//                    if Success {
-//                        self.dismiss(animated: true, completion: nil)
-//                    } else {
-//                        OperationQueue.main.addOperation {
-//                            self.showAlert(with: "Error", message: "Incorrect Password")
-//                        }
-//                    }
-//                })
+                AuthService.instance.login(username: name, password: password, completion: { Success in
+                    if Success {
+                        //self.dismiss(animated: true, completion: nil)
+                        OperationQueue.main.addOperation {
+                            self.activitiIndicator.stopAnimating()
+                            self.performSegue(withIdentifier: "registerShow", sender: self)
+                        }
+                        
+                    } else {
+                        OperationQueue.main.addOperation {
+                            self.showAlert(with: "Error", message: "Incorrect Password")
+                        }
+                    }
+                })
                 
                 
-                OperationQueue.main.addOperation {
-                    self.showAlert(with: "Cool", message: "You have succeeded")
-                }
+//                OperationQueue.main.addOperation {
+//                    self.showAlert(with: "Cool", message: "You have succeeded")
+//                }
             } else {
                 OperationQueue.main.addOperation {
                     self.showAlert(with: "Error", message: "An Unknown Error occurred saving the account")
@@ -74,26 +89,13 @@ class RegisterViewController: UIViewController {
             }
         })
     }
-    /*@IBAction func closeButtonTapped(sender: UIButton){
-        //self.innerView.isHidden = true
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { 
-            self.containerView.isHidden = true
-        }, completion: nil)
-        
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-      let touch = touches.first
-        if touch!.view == self.innerView {
-            if self.containerView.isHidden == false {
-                //self.containerView.isHidden = true
-                UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-                    self.containerView.isHidden = true
-                }, completion: nil)
-            }
+    
+    @IBAction func goToConnexion(_ sender: Any) {
+        if let connexionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            self.present(connexionViewController, animated: true, completion: nil)
         }
-    }*/
+    }
+
     
     func showAlert(with title: String?, message: String?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -8,94 +8,69 @@
 
 import UIKit
 
-class ScrollViewCell: UITableViewCell, UIScrollViewDelegate, TAPageControlDelegate{
-    var index = 0
-    @IBOutlet weak var scrollView: UIScrollView!
+class ScrollViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
     var timer = Timer()
-    var cutomPageControl = TAPageControl()
-    var images:[String] = ["img1","img2","img3"]
-    //override var contentView: UIView?
+    let images = ["album","album","album","album","album","album","album","album","album","album","album"]
+    var counter = 0
     override func awakeFromNib() {
         super.awakeFromNib()
-        //scrollView.resizeScrollViewContentSize()
-        scrollView.frame = self.frame
-        cutomPageControl.numberOfPages = images.count
-        for index1 in 0..<images.count {
-            print(index)
-            let xPos = scrollView.frame.size.width * CGFloat(index1)
-            let imageView = UIImageView(frame: CGRect(x: xPos, y: 0, width: self.frame.size.width, height: self.frame.size.height))
-            print(self.frame.size.width)
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.image = UIImage(named: self.images[index1])
-            //imageView.sizeToFit()
-            scrollView.addSubview(imageView)
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionViewFlowLayout.estimatedItemSize = CGSize(width: (collectionView?.frame.width)!, height: 200)
+        pageControl.numberOfPages = images.count
+        pageControl.currentPage = 0
+        self.collectionView.isPagingEnabled = true
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.imageChange), userInfo: nil, repeats: true)
         }
-        print("scroll view : \(scrollView.frame.size.width)")
-        scrollView.contentSize = CGSize(width: ((self.frame.size.width) * CGFloat(images.count)), height: (scrollView.frame.size.height))
-        index = 0
-        scrollView.delegate = self
-        cutomPageControl = TAPageControl(frame: CGRect(x: 20, y: (scrollView.frame.origin.y + scrollView.frame.size.height), width: scrollView.frame.size.width, height: 40))
-        cutomPageControl.delegate = self
-        cutomPageControl.numberOfPages = self.images.count
-        cutomPageControl.dotSize = CGSize(width: 20, height: 20)
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(self.images.count), height: scrollView.frame.size.height)
-          addSubview(self.cutomPageControl)
     }
-    override func draw(_ rect: CGRect) {
-        var contentSize: CGSize  = scrollView.contentSize;
-        contentSize.height = self.frame.size.height;
-        scrollView.contentSize = contentSize;
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.images.count
     }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = scrollView.contentOffset.x / scrollView.frame.size.width
-        self.cutomPageControl.currentPage = Int(pageIndex)
-        index = Int(pageIndex)
-    }
-    func taPageControl(_ pageControl: TAPageControl!, didSelectPageAt currentIndex: Int) {
-        index = currentIndex
-        scrollView.scrollRectToVisible(CGRect(x: scrollView.frame.size.width * CGFloat(currentIndex), y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height), animated: true)
-    }
-//    override func layoutIfNeeded() {
-//
-//    }
-    override func layoutSubviews() {
-        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(runImages), userInfo: nil, repeats: true)
-    }
-
-    @objc func runImages(){
-        self.cutomPageControl.currentPage = index
-        if index == self.images.count - 1 {
-            index = 0
+    @objc func imageChange(){
+        if counter < self.images.count {
+            let index = IndexPath.init(item: counter, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            self.collectionView.isPagingEnabled = true
+            pageControl.currentPage = counter
+            counter += 1
         }else{
-            index = index + 1
+            counter = 0
+            let index = IndexPath.init(item: counter, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            self.collectionView.isPagingEnabled = true
+            pageControl.currentPage = counter
         }
-        taPageControl(cutomPageControl, didSelectPageAt: index)
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "SlideShow", for: indexPath)
+        cell.layer.cornerRadius = 15
+        cell.layer.masksToBounds = true
+        if let vc = cell.viewWithTag(101) as? UIImageView{
+            vc.image = UIImage(named: self.images[indexPath.row])
+        }else if let ab = cell.viewWithTag(102) as? UIPageControl{
+            ab.currentPage = indexPath.row
+        }
+        return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = self.collectionView.frame.size
+        return CGSize(width: size.width, height: 200)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
 }
 
 
-extension UIScrollView {
-    
-    func resizeScrollViewContentSize() {
-        
-        var contentRect = CGRect.zero
-        
-        for view in self.subviews {
-            
-            contentRect = contentRect.union(view.frame)
-            
-        }
-        
-        self.contentSize = contentRect.size
-        
-    }
-    
-}
+

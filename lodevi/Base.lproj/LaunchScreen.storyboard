@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,18 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lodevi" translatesAutoresizingMaskIntoConstraints="NO" id="cQC-j2-q8R">
-                                <rect key="frame" x="16" y="272.5" width="343" height="122"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lodevi" translatesAutoresizingMaskIntoConstraints="NO" id="5pE-cZ-mjE">
+                                <rect key="frame" x="122.5" y="268.5" width="130" height="130"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343" id="6xB-NS-CwK"/>
-                                    <constraint firstAttribute="height" constant="122" id="9Aa-Uw-iHJ"/>
+                                    <constraint firstAttribute="width" constant="130" id="NLM-vI-487"/>
+                                    <constraint firstAttribute="height" constant="130" id="Q0h-8j-0Vi"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.031372549020000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cQC-j2-q8R" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Qv0-vR-bnx"/>
-                            <constraint firstItem="cQC-j2-q8R" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="h04-0C-hjD"/>
+                            <constraint firstItem="5pE-cZ-mjE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dx2-BL-TPu"/>
+                            <constraint firstItem="5pE-cZ-mjE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="rgU-G7-DNb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lodevi" width="540" height="308"/>
+        <image name="lodevi" width="460" height="455"/>
     </resources>
 </document>

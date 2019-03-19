@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-
+//import NVActivityIndicatorView
 class MainViewController: UIViewController{
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -30,27 +29,6 @@ class MainViewController: UIViewController{
     }
 
     
-    // MARK - 2 * Down here we are going to override the method of the scrollViewDelegate as a protocol
-   /*func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        var pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
-        pageController.currentPage = Int(pageNumber)
-        
-        
-    }*/
-    
-    
-    
-    
-//    @objc func didTapOpenButton(sender: UIBarButtonItem){
-////        if self.revealViewController() != nil {
-////            Home.target = self.revealViewController()
-////            Home.action = "revealToggle:"
-////            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-////        }
-//    }
-//    
-//    @objc func openSearch(sender: UIBarButtonItem){
-//         print("you have licked on search button")
-//    }
+   
 }
 

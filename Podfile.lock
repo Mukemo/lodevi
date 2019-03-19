@@ -1,3 +1,26 @@
-PODFILE CHECKSUM: e9c851f1f4d4f67b85693b15728cba05a39b5a14
+PODS:
+  - NVActivityIndicatorView (4.6.1):
+    - NVActivityIndicatorView/Presenter (= 4.6.1)
+  - NVActivityIndicatorView/Presenter (4.6.1)
+  - Toast-Swift (4.0.1)
+  - XLPagerTabStrip (8.1.0)
 
-COCOAPODS: 1.5.3
+DEPENDENCIES:
+  - NVActivityIndicatorView
+  - Toast-Swift (~> 4.0.0)
+  - XLPagerTabStrip (~> 8.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - NVActivityIndicatorView
+    - Toast-Swift
+    - XLPagerTabStrip
+
+SPEC CHECKSUMS:
+  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
+  Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
+  XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
+
+PODFILE CHECKSUM: f55e1a60bd0f5083f30e2085ffe5f5c61a7b6fd6
+
+COCOAPODS: 1.7.0.beta.1

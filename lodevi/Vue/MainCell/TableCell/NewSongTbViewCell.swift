@@ -1,14 +1,14 @@
 //
-//  NewReleaseViewCell.swift
+//  NewSongTbViewCell.swift
 //  lodevi
 //
-//  Created by apple on 26/10/18.
-//  Copyright © 2018 apple. All rights reserved.
+//  Created by apple on 12/03/19.
+//  Copyright © 2019 apple. All rights reserved.
 //
 
 import UIKit
 
-class NewReleaseViewCell: UITableViewCell {
+class NewSongTbViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

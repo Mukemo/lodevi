@@ -13,7 +13,8 @@ class Collection{
     var size:Int = 0
     var year:Int = 0
     var imagThumb:String = ""
-    var artist:Artist?
+    var artistId:Int = 0
+    var artistName: String = ""
     
     public static func parseCollectionJSONData(data: Data) -> [Collection]{
         var collections = [Collection]()
@@ -27,25 +28,30 @@ class Collection{
                             let newcollection = Collection()
                             newcollection.id = item["id"] as! Int
                             newcollection.name = item["name"] as! String
-                            newcollection.size = item["size"] as! Int
+                            if let size =  item["size"] as? Int{
+                                newcollection.size = size
+                            }
                             newcollection.year = item["year"] as! Int
                             if let links = item["_links"] as? Dictionary<String,AnyObject>{
-                                //print(links)
                                 if let thumbnail = links["thumbnail"] as? Dictionary<String, AnyObject>{
                                     newcollection.imagThumb = thumbnail["href"] as! String
                                 }
                             }
                             if let embbed1 = item["_embedded"] as? Dictionary<String, AnyObject> {
-                                //print(embbed1)
                                 if let author = embbed1["author"] as? Dictionary<String, AnyObject>{
-                                    newcollection.artist?.id = author["id"] as! Int
-                                    newcollection.artist?.description = author["description"] as! String
-                                    newcollection.artist?.name = author["name"] as! String
-                                    print()
-                                    print(author["id"] as! Int)
+                                    print("Nemo")
+                                   
+                                    print("End nemo")
+                                    //newcollection.artist?.description = author["description"] as! String
+                                    //newcollection.artist?.name = author["name"] as! String
+                                    newcollection.artistName = author["name"] as! String
                                     if let link1 = author["_links"] as? Dictionary<String, AnyObject> {
                                         if let thumbnail1 = link1["thumbnail"] as? Dictionary<String, AnyObject> {
-                                            newcollection.artist?.thumbnail = thumbnail1["href"] as! String
+//                                            newcollection.artist = newArtist
+//                                            print(newArtist.getDescription())
+//                                            print(newArtist.getId())
+//                                            print(newArtist.getName())
+//                                            print(newArtist.getThumbnail())
                                         }
                                     }
                                 }

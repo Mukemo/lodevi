@@ -35,3 +35,9 @@ let GET_ALL_CATEGORY = "\(BASE_URL_LODEVI)/categories"
 let GET_ALL_COLLECTION = "\(BASE_URL_LODEVI)/collections"
 //Getting all contents
 let GET_ALL_CONTENT = "\(BASE_URL_LODEVI)/content"
+//Getting all the videos
+let GET_ALL_VIDEOS = "\(BASE_URL_LODEVI)/contents?filterBy=type&filter=2"
+//Getting all the audios
+let GET_ALL_AUDIO = "\(BASE_URL_LODEVI)/contents?filterBy=type&filter=1"
+//Getting all music by category ID
+let GET_ALL_MUSIC_BY_CATEGORY = "\(BASE_URL_LODEVI)/contents?filterBy=category"
